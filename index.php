@@ -513,14 +513,17 @@ echo "<h1>21. array_combine() Function</h1>";//Create an array by using the elem
 		$age = array("15", "25", "30");
 		$c = array_combine($fname,$age);
 		print_r($c);
+		echo '<hr>';
 echo "<h1>22. array_diff() Function</h1>";//Compare the values of two arrays, and return the differences
 		$a1 = array("a" => "red", "b" => "blue", "c" => "green");
 		$a2 = array("a" => "red", "g" => "blue", "c" => "yellow");
 		$result = array_diff($a1,$a2);
 		print_r($result);
+		echo '<hr>';
 echo "<h1>23. array_reverse() Function</h1>";//Return an array in the reverse order
 		$a=array("a"=>"Volvo","b"=>"BMW","c"=>"Toyota");
 		print_r(array_reverse($a));
+		echo '<hr>';
 echo "<h1>24. array_unique() Function</h1>";//Remove duplicate values from an array
 		$a=array("a"=>"red","b"=>"green","c"=>"red");
 		print_r($a);
