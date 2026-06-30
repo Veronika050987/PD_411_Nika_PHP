@@ -528,5 +528,20 @@ echo "<h1>24. array_unique() Function</h1>";//Remove duplicate values from an ar
 		?>
 		</pre>
 	</details>
+	<details>
+		<summary>Input fields</summary>
+		<form method="post">
+			<input type="text" name="name" placeholder="Введите имя">
+			<button type="submit">Отправить</button>
+		</form>
+
+		<?php
+		if (isset($_POST['name'])) 
+		{
+			$name = htmlspecialchars($_POST['name']);
+			echo "Привет, $name!";
+		}
+		?>
+	</details>
 </body>
 </html>
