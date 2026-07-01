@@ -13,7 +13,7 @@
 		<input type="text" name="last_name" placeholder="Имя">
 		<input type="text" name="first_name" placeholder="Фамилия">
 		<input type="email" name="email" placeholder="E-mail">
-		<input type="submit" value="Отправить">
+		<button type="submit">Отправить</button>
 	</form>
 </body>
 </html>
