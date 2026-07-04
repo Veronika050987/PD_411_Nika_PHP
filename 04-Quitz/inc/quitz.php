@@ -27,10 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<?php if ($showResult): ?>
+<?php if ($showResult == false || $i == 0): ?>
     <div class="result-message">
-        <h2>Вы набрали <?= $score ?> из <?= count($questions) ?> баллов!</h2>
-        <a href="quitz.php">Пройти снова</a>
+        <!--<h2>Вы набрали <?= $score ?> из <?= count($questions) ?> баллов!</h2>-->
+        <!--<a href="quitz.php"></a>-->
     </div>
 <?php else: ?>
     <form action="" method="post">
@@ -49,6 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">Отправить</button>
         </div>
     </form>
+        <h2>Вы набрали <?= $score ?> из <?= count($questions) ?> баллов!</h2>
+        <a href="quitz.php">Пройти снова</a>
 <?php endif; ?>
 
 <?php require_once __DIR__ . '/footer.php' ?>
