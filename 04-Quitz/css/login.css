@@ -1,15 +1,18 @@
-﻿body {
-	background-color: #E0FFFF;
-	color: aliceblue;
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+	font-family: Roboto Condensed;
+	background-color: lightskyblue;
+	color: navy;
 	display: grid;
 }
 
 .login-card {
 	width: 400px;
-	background-color: #008080;
+	background-color: #2E8B57;
 	border-radius: 7px;
 	justify-self: center;
-	box-shadow: 0 0 25px 0 #228B22;
+	box-shadow: 0 0 25px 0 #FFFF00;
 	padding: 0 0 16px 0;
 	margin: 300px;
 }
@@ -23,25 +26,46 @@
 
 	.login-item > label {
 		width: 100px;
+		height: 28px;
+		font-size:16px;
 		text-align: right;
 		margin: 5px;
 	}
 
 	.login-item > input {
 		width: 250px;
+		height: 27px;
+		font-size: 16px;
+		color: #228B22;
 		margin: 5px;
 		border-radius: 5px;
 		border: none;
 	}
+		.login-item > input:hover {
+			background-color: #B0E0E6;
+		}
 
 	.login-item > button {
 		width: 150px;
+		height: 30px;
 		margin: 5px;
 		border-radius: 5px;
 		border: none;
 		padding: 5px;
 		align-self: right;
+		background-color: #ADD8E6;
+		color: #00008B;
+		font-weight: bold;
+		font-size: 16px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 	}
+		.login-item > button:hover {
+			background-color: #98FB98;
+			color: #006400;
+			font-weight: bold;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+
+		}
 /*
 	https://stackoverflow.com/questions/8828451/how-to-right-align-this-submit-button
 */
