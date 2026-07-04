@@ -1,10 +1,16 @@
-﻿form
-{
+﻿form {
 	width: 50%;
-	border: solid 1px;
+	border: solid 3px;
+	border-radius: 5px;
+	border-color: #FFFF00;
 }
 .quitz-content
 {
 	text-align: left;
 	color: navy;
+}
+form > div:last-child {
+	display: flex;
+	justify-content: flex-end; /* Сдвигает всё содержимое вправо */
+	padding: 10px; /* Добавит немного отступа от краев */
 }
