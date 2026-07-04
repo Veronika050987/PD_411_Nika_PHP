@@ -19,7 +19,7 @@ echo '</pre>';
 		<?php endfor ?>
 	</div>
 	<!--<input type="submit" value="Отправить" >-->
-	<div><button type="submit">Отправить</button></div>
+	<div class="button-container"><button type="submit">Отправить</button></div>
 </form>
 
 <?php require_once __DIR__ . '/footer.php' ?>

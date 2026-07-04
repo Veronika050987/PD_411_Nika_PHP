@@ -11,6 +11,31 @@
 }
 form > div:last-child {
 	display: flex;
-	justify-content: flex-end; /* Сдвигает всё содержимое вправо */
-	padding: 10px; /* Добавит немного отступа от краев */
+	justify-content: flex-end;  /*Сдвигает всё содержимое вправо */
+	padding: 10px;  /*Добавит немного отступа от краев */
 }
+	form button {
+		width: 150px;
+		height: 30px;
+		margin: 5px;
+		border-radius: 5px;
+		border: none;
+		padding: 5px;
+		align-self: right;
+		background-color: #ADD8E6;
+		color: #00008B;
+		font-weight: bold;
+		font-size: 16px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+	}
+		form button > hover {
+			background-color: #98FB98;
+			color: #006400;
+			font-weight: bold;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+		}
+/*.button-container {
+	display: flex;
+	justify-content: flex-end;
+	padding: 10px;
+}*/
