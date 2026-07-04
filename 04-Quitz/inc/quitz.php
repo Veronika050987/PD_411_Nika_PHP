@@ -6,7 +6,7 @@ print_r(ROOT . "\n");
 echo $_SERVER['DOCUMENT_ROOT'];
 echo '</pre>';
 ?>
-<form-action="" method="post">
+<form action="" method="post">
     <div class="quitz-content">
         <?php for($i=0; $i < count($questions); $i++): ?>
             <div class="question">
