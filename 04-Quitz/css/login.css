@@ -1,0 +1,42 @@
+﻿body {
+	background-color: darkslategray;
+	color: aliceblue;
+	display: grid;
+}
+
+.login-card {
+	width: 400px;
+	background-color: darkcyan;
+	border-radius: 5px;
+	justify-self: center;
+	box-shadow: 0 0 25px 0 aliceblue;
+	padding: 0 0 16px 0;
+}
+
+.login-item {
+	width: 380px;
+	display: flex;
+	justify-content: center;
+	justify-self: center;
+}
+
+	.login-item > label {
+		width: 100px;
+		text-align: right;
+		margin: 5px;
+	}
+
+	.login-item > input {
+		width: 250px;
+		margin: 5px;
+		border-radius: 5px;
+		border: none;
+	}
+
+	.login-item > button {
+		width: 150px;
+		align-self: right;
+	}
+/*
+	https://stackoverflow.com/questions/8828451/how-to-right-align-this-submit-button
+*/
