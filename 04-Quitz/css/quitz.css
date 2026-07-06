@@ -1,9 +1,22 @@
-﻿form
+﻿.form-quitz
 {
-	width: 50%;
-	border: solid 1px;
+	width: 40%;
+	border: solid 1px gray;
+	padding:22px;
 }
+	.form-quitz > div:last-child {
+		display: flex;
+		justify-content: flex-end;
+	}
 .quitz-content
 {
 	text-align: left;
+}
+.result {
+	font-size: 48px;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
