@@ -17,8 +17,22 @@ for($i=0; $i < count($user_answers); $i++)
     if ($answer == $correct_answers[$i])$score++;
 
 }
+$score_message = "Correct answers: {$score}.";
+//$receipient = 'kovtun_ol@t.top-academy.ru';
+//$receipient = 'jv00000@pcma.tech';
+$receipient = 'batumivice@yandex.ru';
+$sender = 'nika@PD411.academy';
+//$sender = 'veronicaviv@mail.ru';
+//$headers = 'MIME-Version: 1.0\r\n';
+//$headers = 'Content-type: text/html; charset=utf-8\r\n';
+//$headers = "To: {$receipient}\r\n";
+$headers = "From: {$sender}\r\n";
+
 echo '<div class="result">';
-echo "Количество правильных ответов: {$score}.";
+echo $score_message;
+echo '<br>';
+echo mail($receipient, 'Test results', 
+    $score_message, $headers);
 echo '</div>';
 require_once __DIR__ . '/footer.php';
 ?>
