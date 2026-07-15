@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<holidays>
+	<holiday>
+		<date>2027.02.23</date>
+		<time>9:00</time>
+		<description>23 февраля</description>
+		<event>Поздравить коллег</event>
+	</holiday>
+	<holiday>
+		<date>2027.03.08</date>
+		<time>9:00</time>
+		<description>8 марта</description>
+		<event>Поздравить девчонок</event>
+	</holiday>
+</holidays>	
