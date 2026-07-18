@@ -19,9 +19,9 @@ for($i=0; $i < count($user_answers); $i++)
 }
 $score_message = "Correct answers: {$score}.";
 //$receipient = 'kovtun_ol@t.top-academy.ru';
-$receipient = 'jv00000@pcma.tech';
-//$receipient = 'batumivice@yandex.ru';
-$sender = 'master@freebsd2.academy';
+//$receipient = 'jv00000@pcma.tech';
+$receipient = 'batumivice@yandex.ru';
+$sender = 'client@PD411.academy';
 //$sender = 'nika@PD411.academy';
 //$sender = 'veronicaviv@mail.ru';
 //$headers = 'MIME-Version: 1.0\r\n';
