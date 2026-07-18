@@ -21,8 +21,8 @@
 			{
 				document.getElementById("question_number").innerHTML = request.responseText;
 			}
-			if(answer == null)request.open("GET", "question.php?q="+questionNumber, true);
-			else request.open("GET", "question.php?q="+questionNumber+"&a="+answer.value, true);
+			if(answer == null)request.open("GET", "index.php?q="+questionNumber, true);
+			else request.open("GET", "index.php?q="+questionNumber+"&a="+answer.value, true);
 			request.send();
 		}
 		function prevQuestion()
@@ -36,8 +36,8 @@
 			{
 				document.getElementById("question_number").innerHTML = request.responseText;
 			}
-			if(answer == null)request.open("GET", "question.php?q="+questionNumber, true);
-			else request.open("GET", "question.php?q="+questionNumber+"&a="+answer.value, true);
+			if(answer == null)request.open("GET", "index.php?q="+questionNumber, true);
+			else request.open("GET", "index.php?q="+questionNumber+"&a="+answer.value, true);
 			request.send();
 		}
 
