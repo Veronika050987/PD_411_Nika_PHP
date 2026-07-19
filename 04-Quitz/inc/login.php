@@ -1,4 +1,4 @@
-<form class="login-card" action="inc/main.php" method="post">
+<form class="login-card" action="inc/index.php" method="post">
     <div class="login-item"><h3>Введите Ваши данные:</h3></div>
     <div class="login-item"><label for="last_name">		Фамилия: </label><input type="text" name="last_name"	id="last_name"		placeholder="Фамилия"></div>
 	<div class="login-item"><label for="first_name">	Имя:	 </label><input type="text" name="first_name"	id="first_name"		placeholder="Имя"></div>
