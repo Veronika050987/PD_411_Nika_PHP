@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Cookies & Session</title>
+</head>
+<body>
+    <h1>Cookies & Session</h1>
+	HTTP-request
+	<ul>
+		<li><a href="cookie.php">Cookie</a></li>
+	</ul>
+
+	<h2>Cookie</h2>
+
+	<pre>
+		bool setcookie
+		(
+		string $name,	//У каждой печеньки есть строковое имя;
+		string $value	= "",	//Значение может быть любого скалярного типа 'string' либо 'int';
+		int $expires	= 0,	//У каждой печеньки есть время жизни в формате Timestamp;
+		string $path	= "",	//Путь на Сервере, по которому будет доступна печенька. Корневой каталог ресурса (домена) обозначается '/';
+		string $domain	= "", //Домен, на котором будет доступна печенька;
+		bool $secure	= false,	//Печеньку можно передавать только по защищенному соединению (HTTPS);
+		bool $httponly	= false	//Печеньку можно передавать только по открытому каналу
+		);
+
+		$_COOKIE['name'];
+		if(isset($_COOKIE['name']))
+		{
+		//TODO:.......
+		//............
+		}
+	</pre>
+</body>
+</html>
