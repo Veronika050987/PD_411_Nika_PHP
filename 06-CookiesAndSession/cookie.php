@@ -98,7 +98,7 @@ if (isset($_COOKIE['return'])) {
             });
         }
 
-        // Инициализация при загрузке
+        //Инициализация при загрузке
         (function() {
             let saved = Cookies.get("color_scheme");
             if (saved) {
