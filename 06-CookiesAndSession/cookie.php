@@ -17,7 +17,7 @@ if (isset($_COOKIE['return'])) {
 <head>
     <meta charset="utf-8" />
     <title>Cookies</title>
-	<script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 
 	<style>
         body.light {
@@ -30,14 +30,14 @@ if (isset($_COOKIE['return'])) {
         }
 		body{ transition: background-color 0.3s, color 0.3s; }
         
-		.theme-toggle-button 
+		/*.theme-toggle-button 
 		{
             padding: 10px 15px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
-            margin-left: 10px; /* Отступ от других элементов */
-        }
+            margin-left: 10px;*/ /* Отступ от других элементов */
+        /*}
 
         body.light .theme-toggle-button {
             background-color: #e0e0e0;
@@ -47,7 +47,7 @@ if (isset($_COOKIE['return'])) {
         body.dark .theme-toggle-button {
             background-color: #3a3a3a;
             color: #ffffff;
-        }
+        }*/
 	</style>
 </head>
 <body class="light">
@@ -57,61 +57,48 @@ if (isset($_COOKIE['return'])) {
 	<h2>
 		<?= $visitor ? 'Welcome back' : 'Hello'; ?>
 	</h2>
+
+	<button onclick='toggle_theme()'>Сменить тему</button>
 	<button onclick='ResetCookies()'>Сбросить</button>
-	<button id="theme-toggle-button" class="theme-toggle-button" onclick='toggle_theme()'>
-        Сменить тему
-    </button>
+
 	<img src="CODEPAGE.png" style="width:1100px;height:600px;">
 
 	<script>
-		function get_color_theme()
-		{
-			return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
-		}
+		 // Функция применения темы
+        function apply_theme(scheme) {
+            document.body.className = scheme;
+        }
 
-		function apply_theme()
-		{
-			document.body.className = scheme;
-		}
+        // Функция переключения
+        function toggle_theme() {
+            let current = Cookies.get("color_scheme") || "light";
+            let next = (current === "dark") ? "light" : "dark";
+            
+            Cookies.set("color_scheme", next, { expires: 365 });
+            apply_theme(next);
+        }
 
-		function update_color_theme()
-		{
-			let scheme = get_color_theme();
-			Cookies.set("color_scheme", scheme);
-			apply_theme();
-		}
+        // Функция сброса
+        function ResetCookies() {
+            fetch('reset_cookies.php').then(() => {
+                Cookies.remove("color_scheme");
+                // Возвращаем к системной настройке после сброса
+                let systemScheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+                apply_theme(systemScheme);
+                alert("Настройки сброшены");
+            });
+        }
 
-		let $color_scheme = Cookies.get("color_scheme");
-
-		if (typeof $color_scheme === "undefined")
-		{
-			$color_scheme = get_color_theme();
-			Cookies.set("color_scheme", $color_scheme);
-		}
-
-		apply_theme();
-
-		if (window.matchMedia)
-		{
-			window.matchMedia("(prefers-color-scheme: dark)").addListener(update_color_scheme);
-		}
-
-		function ResetCookies()
-		{
-			let request = new XMLHttpRequest();
-			request.onreadystatechange = function()
-			{
-				if (this.readyState == 4 && this.status == 200)
-				{
-					Cookies.remove("color_scheme");
-					//TODO: вызвать функцию, которая стбосит печеньки
-					apply_theme("color_scheme");
-					alert("Настройки сброшены" + this.responseText);
-				}
-			}
-			request.open("GET", "reset_cookies.php", true);
-			request.send();
-		}
+        // Инициализация при загрузке
+        (function() {
+            let saved = Cookies.get("color_scheme");
+            if (saved) {
+                apply_theme(saved);
+            } else {
+                let system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+                apply_theme(system);
+            }
+        })();
 	</script>
 </body>
 </html>
