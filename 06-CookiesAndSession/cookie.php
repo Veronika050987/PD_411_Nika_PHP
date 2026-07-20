@@ -29,25 +29,34 @@ if (isset($_COOKIE['return'])) {
             color: #F0F8FF;
         }
 		body{ transition: background-color 0.3s, color 0.3s; }
-        
-		/*.theme-toggle-button 
+
+        .reset-button
+        {
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+
+		.theme-toggle-button 
 		{
             padding: 10px 15px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
-            margin-left: 10px;*/ /* Отступ от других элементов */
-        /*}
-
-        body.light .theme-toggle-button {
-            background-color: #e0e0e0;
-            color: #000000;
+            margin-left: 10px; 
         }
 
-        body.dark .theme-toggle-button {
-            background-color: #3a3a3a;
-            color: #ffffff;
-        }*/
+        body.light .theme-toggle-button, .reset-button {
+            background-color: #4682B4;
+            color: #F0F8FF;
+        }
+
+        body.dark .theme-toggle-button, .reset-button {
+            background-color: #7FFFD4;
+            color: #191970;
+        }
 	</style>
 </head>
 <body class="light">
@@ -58,8 +67,8 @@ if (isset($_COOKIE['return'])) {
 		<?= $visitor ? 'Welcome back' : 'Hello'; ?>
 	</h2>
 
-	<button onclick='toggle_theme()'>Сменить тему</button>
-	<button onclick='ResetCookies()'>Сбросить</button>
+	<button onclick='toggle_theme()' class="theme-toggle-button">Сменить тему</button>
+	<button onclick='ResetCookies()' class="reset-button">Сбросить</button>
 
 	<img src="CODEPAGE.png" style="width:1100px;height:600px;">
 
