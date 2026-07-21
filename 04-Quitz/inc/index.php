@@ -13,7 +13,7 @@ $questions = [
 $answers = [
     ['Bethesda', 'Crytek', 'Rockstar', 'Remady'],
     ['Cryengine 3', 'Crytek', 'Cryengine 5', 'RAGE'],
-    ['Max Payne', 'Tommy Vercetty', 'Ricardo Diaz', 'None'],
+    ['Max Payne', 'Tommy Vercetty', 'Ricardo Diaz', ' Winnie-the-Pooh'],
     ['2003', '2012', '2013', '2015'],
     ['Cryengine 3', 'Crytek', 'Cryengine 5', 'RAGE'],
 ];
@@ -52,19 +52,111 @@ $n = $_SESSION["number"];
 
 <!DOCTYPE html>
 <html>
-<head><title>Тест</title></head>
-<body>
+<head><title>Тест</title>
+   <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+
+	<style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+        body {
+            font-family: Roboto Condensed;
+            font-size: 20px;
+        }
+
+        body.light {
+            background-color: #E0FFFF;
+            color: #191970;
+        }
+        body.dark {
+            background-color: #483D8B;
+            color: #F0F8FF;
+        }
+		body{ transition: background-color 0.3s, color 0.3s; }
+
+        .reset-button
+        {
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+
+		.theme-toggle-button 
+		{
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px; 
+            font-size: 18px;
+        }
+
+        body.light .theme-toggle-button
+        {
+            background-color: #4682B4;
+            color: #F0F8FF;
+        }
+
+        body.dark .theme-toggle-button
+        {
+            background-color: #7FFFD4;
+            color: #191970;
+        }
+        body.light .theme-toggle-button:hover {
+            background-color: #191970;
+            color: #F0F8FF;
+        }
+
+        body.dark .theme-toggle-button:hover {
+            background-color: #40E0D0;
+            color: #191970;
+        }
+        div
+        {
+            margin: 0;
+            height: 10vh;
+            display: grid;
+            place-items: center;
+        }
+            div .theme-toggle-button 
+            {
+                margin: 230px;
+                place-items: center;
+            }
+        .answers-container
+        {
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            width: fit-content;
+            gap: 10px;
+        }
+        .answers-item
+        {
+            align-self: flex-start;
+            display: flex;
+            align-items: center;
+        }
+	</style> 
+</head>
+<body class="light">
+    <div> 
     <?php if ($n < count($questions)): ?>
         <h2>Вопрос <?php echo ($n + 1); ?> из <?php echo count($questions); ?></h2>
         <p><?php echo $questions[$n]; ?></p>
         
         <form method="POST">
+            <div class="answers-container">
             <?php foreach ($answers[$n] as $i => $text): ?>
+                <div class="answers-item">
                 <input type="radio" name="answer" id="a<?php echo $i; ?>" value="<?php echo $i; ?>" 
                     <?php echo (isset($_SESSION["user_answers"][$n]) && $_SESSION["user_answers"][$n] == $i) ? 'checked' : ''; ?> required>
                 <label for="a<?php echo $i; ?>"><?php echo $text; ?></label><br>
+                </div>
             <?php endforeach; ?>
-            
+            </div>
+            <br>
             <br>
             <?php if ($n > 0): ?>
                 <button type="submit" name="prev">Назад</button>
@@ -86,5 +178,23 @@ $n = $_SESSION["number"];
         <p>Ваш результат: <?php echo $score; ?> из <?php echo count($questions); ?></p>
         <form method="POST"><button type="submit" name="reset">Начать заново</button></form>
     <?php endif; ?>
+    </div>
+    <br>
+    <div><button onclick='toggle_theme()' class="theme-toggle-button">Сменить тему</button></div>
+    <script>
+		 // Функция применения темы
+        function apply_theme(scheme) {
+            document.body.className = scheme;
+        }
+
+        // Функция переключения
+        function toggle_theme() {
+            let current = Cookies.get("color_scheme") || "light";
+            let next = (current === "dark") ? "light" : "dark";
+            
+            Cookies.set("color_scheme", next, { expires: 365 });
+            apply_theme(next);
+        }
+	</script>
 </body>
 </html>
