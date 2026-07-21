@@ -46,6 +46,7 @@ if (isset($_COOKIE['return'])) {
             cursor: pointer;
             border-radius: 5px;
             margin-left: 10px; 
+            margin-bottom: 50px; 
             font-size:18px;
         }
 
