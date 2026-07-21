@@ -46,15 +46,26 @@ if (isset($_COOKIE['return'])) {
             cursor: pointer;
             border-radius: 5px;
             margin-left: 10px; 
+            font-size:18px;
         }
 
-        body.light .theme-toggle-button, .reset-button {
+        body.light .theme-toggle-button{
             background-color: #4682B4;
             color: #F0F8FF;
         }
 
-        body.dark .theme-toggle-button, .reset-button {
+        body.dark .theme-toggle-button{
             background-color: #7FFFD4;
+            color: #191970;
+        }
+
+        body.light .theme-toggle-button:hover {
+            background-color: #191970;
+            color: #F0F8FF;
+        }
+
+        body.dark .theme-toggle-button:hover {
+            background-color: #40E0D0;
             color: #191970;
         }
 	</style>
@@ -68,7 +79,7 @@ if (isset($_COOKIE['return'])) {
 	</h2>
 
 	<button onclick='toggle_theme()' class="theme-toggle-button">Сменить тему</button>
-	<button onclick='ResetCookies()' class="reset-button">Сбросить</button>
+	<button onclick='ResetCookies()' class="theme-toggle-button">Сбросить</button>
 
 	<img src="CODEPAGE.png" style="width:1100px;height:600px;">
 
