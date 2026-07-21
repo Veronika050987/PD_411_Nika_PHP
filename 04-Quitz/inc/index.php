@@ -195,6 +195,27 @@ $n = $_SESSION["number"];
             Cookies.set("color_scheme", next, { expires: 365 });
             apply_theme(next);
         }
+        // Функция сброса
+        function ResetCookies() {
+{
+                Cookies.remove("color_scheme");
+                // Возвращаем к системной настройке после сброса
+                let systemScheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+                apply_theme(systemScheme);
+                alert("Настройки сброшены");
+            };
+        }
+
+        //Инициализация при загрузке
+        (function() {
+            let saved = Cookies.get("color_scheme");
+            if (saved) {
+                apply_theme(saved);
+            } else {
+                let system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+                apply_theme(system);
+            }
+        })();
 	</script>
 </body>
 </html>
