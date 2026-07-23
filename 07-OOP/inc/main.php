@@ -31,4 +31,58 @@ $graduate = new Graduate
     "How to catch Hiesenberg"
 );
 echo $graduate . '<br>';
+
+
+//my group variant :)
+$list = [
+    [
+        "last_name" => "Pinkman",
+        "first_name" => "Jessie",
+        "age" => 20,
+        "spec" => "Chemistry",
+        "group" => "WW_220",
+        "rating" => 90,
+        "attendance" => 95 ],
+    [
+        "last_name" => "Vercetty",
+        "first_name" => "Tommy",
+        "age" => 30,
+        "spec" =>"Criminalistic",
+        "group" => "WW_225",
+        "rating" => 93,
+        "attendance" => 90],
+    [
+        "last_name" => "Rosenberg",
+        "first_name" => "Ken",
+        "age" => 29,
+        "spec" => "Chemistry",
+        "group" => "WW_220",
+        "rating" => 57,
+        "attendance" => 100],
+    [
+        "last_name" => "Carrington",
+        "first_name" => "Avery",
+        "age" => 32,
+        "spec" => "Criminalistic",
+        "group" => "WW_225",
+        "rating" => 63,
+        "attendance" => 78
+    ],
+    [
+        "last_name" => "Cassidy",
+        "first_name" => "Phil",
+        "age" => 23,
+        "spec" => "Chemistry",
+        "group" => "WW_220",
+        "rating" => 63,
+        "attendance" => 78
+    ]
+];
+$grouped = [];
+foreach ($list as $item) {
+    $grouped[$item['spec']][] = $item;
+}
+echo "<pre>";
+print_r($grouped);
+echo "</pre>";
 ?>
