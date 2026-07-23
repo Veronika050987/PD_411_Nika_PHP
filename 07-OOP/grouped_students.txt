@@ -1,0 +1,66 @@
+Array
+(
+    [WW_220] => Array
+        (
+            [0] => Array
+                (
+                    [last_name] => Pinkman
+                    [first_name] => Jessie
+                    [age] => 20
+                    [spec] => Chemistry
+                    [group] => WW_220
+                    [rating] => 90
+                    [attendance] => 95
+                )
+
+            [1] => Array
+                (
+                    [last_name] => Rosenberg
+                    [first_name] => Ken
+                    [age] => 29
+                    [spec] => Chemistry
+                    [group] => WW_220
+                    [rating] => 57
+                    [attendance] => 100
+                )
+
+            [2] => Array
+                (
+                    [last_name] => Cassidy
+                    [first_name] => Phil
+                    [age] => 23
+                    [spec] => Chemistry
+                    [group] => WW_220
+                    [rating] => 63
+                    [attendance] => 78
+                )
+
+        )
+
+    [WW_225] => Array
+        (
+            [0] => Array
+                (
+                    [last_name] => Vercetty
+                    [first_name] => Tommy
+                    [age] => 30
+                    [spec] => Criminalistic
+                    [group] => WW_225
+                    [rating] => 93
+                    [attendance] => 90
+                )
+
+            [1] => Array
+                (
+                    [last_name] => Carrington
+                    [first_name] => Avery
+                    [age] => 32
+                    [spec] => Criminalistic
+                    [group] => WW_225
+                    [rating] => 63
+                    [attendance] => 78
+                )
+
+        )
+
+)
