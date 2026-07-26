@@ -8,49 +8,56 @@ $connection = sqlsrv_connect($server_name, $connection_info);
 
 var_dump($connection);
 
-$query = "SELECT * FROM Directions";
-$results = sqlsrv_query($connection, $query);
-
-var_dump($results);
-
-//echo '<table>';
-//echo '<tr>';
-//echo '<th>';
-//echo 'ID';
-//echo '</th>';
-
-//echo '<th>';
-//echo 'Направление обучения';
-//echo '</th>';
-
-$table_header = '<table><thead><tr><th>ID</th><th>Направление обучения</th></tr></thead>';
-$table_footer = '</tr></table>';
-$table_body = '<tbody>';
-//echo $table_header;
-
-while($row = sqlsrv_fetch_array($results, SQLSRV_FETCH_ASSOC))
+if ($connection === false) 
 {
-    //echo '<pre>';
-    //echo print_r($row);
-    //echo '</pre>';
-    //echo '<tr>';
-    //echo '<td>';
-    //echo $row['direction_id'];
-    //echo '</td>';
-    //echo '<td>';
-    //echo $row['direction_name'];
-    //echo '</td>';
-    //echo '</tr>';
-    //echo create_table_row($row);
-    $table_body .= create_table_row($row);
+    die(print_r(sqlsrv_errors(), true));
 }
 
-$table_body .= '</tbody>';
+$query = "SELECT * FROM Directions";
 
-$table = "{$table_header}{$table_body}{$table_footer}";
+// Выполняем запрос
+$results = sqlsrv_query($connection, $query);
 
-echo $table;
+if ($results === false)
+{
+    die(print_r(sqlsrv_errors(), true));
+}
 
-//echo $table_footer;
+$table_header_html = '<table><thead><tr>';
+
+// Получаем метаданные полей запроса. Это массив, где каждый элемент описывает одно поле.
+$field_metadata = sqlsrv_field_metadata($results);
+
+if ($field_metadata) 
+{
+    foreach ($field_metadata as $field)
+    {
+        $table_header_html .= '<th>' . htmlspecialchars($field['Name']) . '</th>';
+    }
+} else $table_header_html .= '<th>Ошибка получения имен полей</th>';
+
+$table_header_html .= '</tr></thead>';
+
+$table_body_html = '<tbody>';
+
+// Перебираем строки результатов запроса
+while ($row = sqlsrv_fetch_array($results, SQLSRV_FETCH_ASSOC)) 
+{
+    $table_body_html .= create_table_row($row);
+}
+
+$table_body_html .= '</tbody>';
+
+$table_footer_html = '</table>';
+
+$full_table_html = "{$table_header_html}{$table_body_html}{$table_footer_html}";
+
+// Выводим готовую HTML-таблицу
+echo $full_table_html;
+
+// --- Очистка ресурсов ---
+sqlsrv_free_stmt($results);
+
+sqlsrv_close($connection);
 
 ?>
