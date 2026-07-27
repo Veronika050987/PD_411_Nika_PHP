@@ -1,17 +1,16 @@
 <?php
 //phpinfo();
+require_once __DIR__ . '/connect.php';
 require_once __DIR__ . '/create_table_row.php';
+require_once __DIR__ . '/create_table_header.php';
 
-$server_name = "LAPTOP-4AUB2J6T\SQLEXPRESS";
-$connection_info = array("Database" => "PD_321", "UID" => "PHP", "PWD" => "111", "CharacterSet" => "UTF-8");
-$connection = sqlsrv_connect($server_name, $connection_info);
-
-var_dump($connection);
 
 $query = "SELECT * FROM Directions";
 $results = sqlsrv_query($connection, $query);
-
-var_dump($results);
+echo '<pre>';
+create_table_header($results);
+echo '</pre>';
+//var_dump($results);
 
 //echo '<table>';
 //echo '<tr>';
@@ -23,7 +22,8 @@ var_dump($results);
 //echo 'Направление обучения';
 //echo '</th>';
 
-$table_header = '<table><thead><tr><th>ID</th><th>Направление обучения</th></tr></thead>';
+$table_header = create_table_header($results);
+//$table_header = '<table><thead><tr><th>ID</th><th>Направление обучения</th></tr></thead>';
 $table_footer = '</tr></table>';
 $table_body = '<tbody>';
 //echo $table_header;
@@ -53,8 +53,6 @@ echo $table;
 
 //echo $table_footer;
 
-
-sqlsrv_free_stmt($results);
-sqlsrv_close($connection);
+require_once __DIR__ . '/disconnect.php';
 
 ?>
