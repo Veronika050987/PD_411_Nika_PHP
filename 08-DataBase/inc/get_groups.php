@@ -3,18 +3,21 @@ require_once __DIR__ . '/connect.php';
 require_once __DIR__ . '/assembly_table.php';
 
 
-$query =
-"
-    SELECT
-            group_id        AS N'ID',
-            group_name      AS N'Название группы',
-            COUNT(stud_id)  AS N'Количество студентов',
-            direction_name  AS N'Направление обучения'
-    FROM    Students
-    JOIN    Groups          ON ([group]=[group_id])
-    JOIN    Directions      ON (direction=direction_id) 
-    GROUP BY    group_id, group_name, direction_name;
-";
+$query = file_get_contents(__DIR__ . '/../SQL/groups.sql');
+echo '<pre>';
+echo $query;
+echo '</pre>';
+//"
+//    SELECT
+//            group_id        AS N'ID',
+//            group_name      AS N'Название группы',
+//            COUNT(stud_id)  AS N'Количество студентов',
+//            direction_name  AS N'Направление обучения'
+//    FROM    Students
+//    JOIN    Groups          ON ([group]=[group_id])
+//    JOIN    Directions      ON (direction=direction_id) 
+//    GROUP BY    group_id, group_name, direction_name;
+//";
 
 $results = sqlsrv_query($connection, $query);
 echo assembly_table($results);
