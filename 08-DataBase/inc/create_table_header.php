@@ -15,6 +15,7 @@ function create_table_header($results)
     }
     echo '<hr>';
 
+
     $table_header .= '</tr></thead>';
     return $table_header;
 }
