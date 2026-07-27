@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . '/connect.php';
-require_once __DIR__ . '/create_table_row.php';
+require_once __DIR__ . '/assembly_table.php';
 
 
 $query =
-    "
+"
     SELECT
             group_id        AS N'ID',
             group_name      AS N'Название группы',
@@ -17,15 +17,13 @@ $query =
 ";
 
 $results = sqlsrv_query($connection, $query);
-
-
-
-echo '<tbody>';
+echo assembly_table($results);
+/*echo '<tbody>';
 while($row = sqlsrv_fetch_array($results, SQLSRV_FETCH_ASSOC))
 {
     echo create_table_row($row);
 }
-echo '</tbody>';
+echo '</tbody>';*/
 
 require_once __DIR__ . '/disconnect.php';
 

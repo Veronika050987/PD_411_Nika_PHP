@@ -1,8 +1,9 @@
 <?php
 //phpinfo();
 require_once __DIR__ . '/connect.php';
-require_once __DIR__ . '/create_table_row.php';
-require_once __DIR__ . '/create_table_header.php';
+//require_once __DIR__ . '/create_table_row.php';
+//require_once __DIR__ . '/create_table_header.php';
+require_once __DIR__ . '/assembly_table.php';
 
 
 $query = "SELECT * FROM Directions";
@@ -22,8 +23,11 @@ echo '</pre>';
 //echo 'Направление обучения';
 //echo '</th>';
 
-$table_header = create_table_header($results);
 //$table_header = '<table><thead><tr><th>ID</th><th>Направление обучения</th></tr></thead>';
+
+echo assembly_table($results);
+
+/*$table_header = create_table_header($results);
 $table_footer = '</tr></table>';
 $table_body = '<tbody>';
 //echo $table_header;
@@ -46,10 +50,8 @@ while($row = sqlsrv_fetch_array($results, SQLSRV_FETCH_ASSOC))
 }
 
 $table_body .= '</tbody>';
-
 $table = "{$table_header}{$table_body}{$table_footer}";
-
-echo $table;
+echo $table;*/
 
 //echo $table_footer;
 
