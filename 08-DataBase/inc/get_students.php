@@ -4,7 +4,9 @@ require_once __DIR__ . '/assembly_table.php';
 
 
 $query = file_get_contents(__DIR__ . '/../SQL/students.sql');
-
+echo '<pre>';
+echo $query;
+echo '</pre>';
 $query = preg_replace('/^\xEF\xBB\xBF/', '', $query);
 $query = trim($query);
 
