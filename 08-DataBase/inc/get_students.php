@@ -12,20 +12,15 @@ $query = trim($query);
 
 $stmt = sqlsrv_query($connection, $query);
 
-if ($stmt === false) {
-    // ВЫВОДИТ ОШИБКУ, ЕСЛИ ЗАПРОС НЕ ВЫПОЛНИЛСЯ
+if ($stmt === false)
+{
     echo "Ошибка SQL: ";
     print_r(sqlsrv_errors());
     exit;
 }
-//echo '<pre>';
-//echo $query;
-//echo '</pre>';
 
 echo assembly_table($stmt);
-while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-    // здесь ваш вывод строк таблицы
-}
+while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {}
 //$results = sqlsrv_query($connection, $query);
 
 
