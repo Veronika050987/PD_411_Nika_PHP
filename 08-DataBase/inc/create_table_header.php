@@ -2,6 +2,9 @@
    
 function create_table_header($results)
 {
+    if ($results === false)
+        return '';
+
     //echo '<hr>';
     //echo '<h2>Getting table header</h2>';
     $metadata = sqlsrv_field_metadata($results);
