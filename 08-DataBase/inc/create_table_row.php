@@ -6,7 +6,6 @@ function create_table_row($row)
     foreach ($row as $item) {
         $formatted_row .= '<td>';
 
-        // Проверяем, является ли значение объектом (например, DateTime)
         if ($item instanceof DateTime) {
             $formatted_row .= $item->format('Y-m-d'); // Преобразуем дату в строку
         }
