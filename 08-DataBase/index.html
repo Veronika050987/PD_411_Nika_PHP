@@ -9,6 +9,7 @@
 <body onload="getNavMenu()">
     <nav></nav>
     <h1>DataBase</h1>
+    <div id="table"></div>
     <!--<ol>
         <li><a href="inc/main.php">Main</a></li>
         <li><a href="inc/groups.php">Groups</a></li>
@@ -25,6 +26,19 @@
                 }
             }
             request.open("GET", "inc/nav.php", true);
+            request.send();
+        }
+        function loadTable(e)
+        {
+            let request = new XMLHttpRequest();
+            request.onreadystatechange = function ()
+            {
+                if (this.readyState == 4 && this.status == 200)
+                {
+                    document.getElementById("table").innerHTML = this.responseText;
+                }
+            }
+            request.open("GET", `inc/load_table.php?q=${e.target.id}`, true);
             request.send();
         }
     </script>

@@ -11,7 +11,7 @@
     foreach($queries as $query)
     {
         $item = explode('/', $query);
-        $menu .= "<button id={$item[count($item) - 1]}>{$item[count($item) - 1]}</button>";
+        $menu .= "<button onclick=\"loadTable(event)\" id={$item[count($item) - 1]}>{$item[count($item) - 1]}</button>";
     }
     //$menu .= '</nav>';
 
