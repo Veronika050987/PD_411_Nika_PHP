@@ -6,12 +6,27 @@
     <link rel="stylesheet" href="css/style.css">
     <title>DataBase</title>
 </head>
-<body>
+<body onload="getNavMenu()">
+    <nav></nav>
     <h1>DataBase</h1>
-    <ol>
+    <!--<ol>
         <li><a href="inc/main.php">Main</a></li>
         <li><a href="inc/groups.php">Groups</a></li>
-    </ol>
-
+    </ol>-->
+    <script>
+        function getNavMenu()
+        {
+            let request = new XMLHttpRequest();
+            request.onreadystatechange = function ()
+            {
+                if (this.readyState == 4 && this.status == 200)
+                {
+                    document.getElementsByTagName('nav')[0].innerHTML = this.responseText;
+                }
+            }
+            request.open("GET", "inc/nav.php", true);
+            request.send();
+        }
+    </script>
 </body>
 </html>
