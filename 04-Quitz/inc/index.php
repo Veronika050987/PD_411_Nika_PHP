@@ -147,6 +147,29 @@ $ui = $data[$lang]['ui'];//для кнопок и Вопрос ... из
                 background-color: #2E8B57;
                 color: #F0F8FF;
             }
+        .reset-button {
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            height: 55px;
+            width: 100px;
+            background-color: #3CB371;
+            color: #F0F8FF;
+        }
+
+            .reset-button:hover {
+                border: none;
+                cursor: pointer;
+                margin: 10px;
+                border-radius: 5px;
+                font-size: 16px;
+                height: 55px;
+                width: 100px;
+                background-color: #2E8B57;
+                color: #F0F8FF;
+            }
 		.theme-toggle-button 
 		{
             padding: 10px 15px;
@@ -253,7 +276,7 @@ $ui = $data[$lang]['ui'];//для кнопок и Вопрос ... из
         <?php echo $ui['of'] ?> 
         <?php echo count($data); ?></p>
         <form method="POST">
-        <button type="submit" name="reset" class="next-prev-button"><?php echo $ui['restart'] ?></button>
+        <button type="submit" name="reset" class="reset-button"><?php echo $ui['restart'] ?></button>
         </form>
     <?php endif; ?>
     </div>
