@@ -1,21 +1,43 @@
 <?php
+
 session_start();
 
 // 1. НАСТРОЙКИ И ДАННЫЕ
-$questions = [
-    'Кто создал игру Max Payne?',
-    'На каком движке создана игра Crysis 2?',
-    'Как зовут главного персонажа Vice City?',
-    'В каком году вышла GTA-V?',
-    'На каком движке разработана GTA-V?'
-];
-
-$answers = [
-    ['Bethesda', 'Crytek', 'Rockstar', 'Remady'],
-    ['Cryengine 3', 'Crytek', 'Cryengine 5', 'RAGE'],
-    ['Max Payne', 'Tommy Vercetty', 'Ricardo Diaz', ' Winnie-the-Pooh'],
-    ['2003', '2012', '2013', '2015'],
-    ['Cryengine 3', 'Crytek', 'Cryengine 5', 'RAGE'],
+$data = [
+    'ru' => [
+        'ui' => ['q' => 'Вопрос', 'of' => 'из', 'prev' => 'Назад', 'next' => 'Далее', 'finish' => 'Тест завершен!','result' => 'Ваш результат:', 'restart' => 'Начать заново'],
+        'questions' => [
+            'Кто создал игру Max Payne?',
+            'На каком движке создана игра Crysis 2?',
+            'Как зовут главного персонажа Vice City?',
+            'В каком году вышла GTA-V?',
+            'На каком движке разработана GTA-V?'
+        ],
+        'answers' => [
+            ['Bethesda', 'Crytek', 'Rockstar', 'Remady'],
+            ['Cryengine 3', 'Crytek', 'Cryengine 5', 'RAGE'],
+            ['Max Payne', 'Tommy Vercetty', 'Ricardo Diaz', ' Winnie-the-Pooh'],
+            ['2003', '2012', '2013', '2015'],
+            ['Cryengine 3', 'Crytek', 'Cryengine 5', 'RAGE'],
+        ]
+    ],
+    'en' => [
+        'ui' => ['q' => 'Question', 'of' => 'of', 'prev' => 'Prev', 'next' => 'Next', 'finish' => 'Test is finished!', 'result' => 'Your score:', 'restart' => 'Reset'],
+        'questions' => [
+            'Who created the game Max Payne?',
+            'What engine was used for Crysis 2?',
+            'What is the name of Vice City main character?',
+            'When GTA-V was created?',
+            'What engine was used for GTA-V?'
+        ],
+        'answers' => [
+            ['Bethesda', 'Crytek', 'Rockstar', 'Remady'],
+            ['Cryengine 3', 'Crytek', 'Cryengine 5', 'RAGE'],
+            ['Max Payne', 'Tommy Vercetty', 'Ricardo Diaz', ' Winnie-the-Pooh'],
+            ['2003', '2012', '2013', '2015'],
+            ['Cryengine 3', 'Crytek', 'Cryengine 5', 'RAGE'],
+        ]
+    ]
 ];
 
 $correct_answers = [3, 0, 1, 2, 3];
@@ -24,30 +46,52 @@ $correct_answers = [3, 0, 1, 2, 3];
 if (!isset($_SESSION["number"])) {
     $_SESSION["number"] = 0;
     $_SESSION["user_answers"] = [];
-    $_SESSION["score"] = 0;
+    $_SESSION["lang"] = 'ru';
 }
 
 // 2. ОБРАБОТКА ОТПРАВКИ ОТВЕТА
+//if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//    if (isset($_POST['lang']))
+//        $_SESSION["lang"] = $_POST['lang'];
+//    if (isset($_POST['answer'])) {
+//        $_SESSION["user_answers"][$_SESSION["number"]] = (int) $_POST['answer'];
+//        $_SESSION["number"]++;
+//    }
+//    if (isset($_POST['prev']))
+//        $_SESSION["number"] = max(0, $_SESSION["number"] - 1);
+//    if (isset($_POST['reset'])) {
+//        session_destroy();
+//        header("Location: " . $_SERVER['PHP_SELF']);
+//        exit;
+//    }
+//}
+// Обработка смены языка (через GET - это самый простой и правильный способ для навигации)
+if (isset($_GET['lang'])) {
+    $_SESSION["lang"] = ($_GET['lang'] === 'en') ? 'en' : 'ru';
+    header("Location: " . $_SERVER['PHP_SELF']); // Перезагрузка, чтобы применить язык
+    exit;
+}
+
+// Обработка формы
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['answer'])) {
-        $curr = $_SESSION["number"];
-        $_SESSION["user_answers"][$curr] = (int) $_POST['answer'];
+        $_SESSION["user_answers"][$_SESSION["number"]] = (int) $_POST['answer'];
         $_SESSION["number"]++;
     }
-
     if (isset($_POST['prev'])) {
         $_SESSION["number"] = max(0, $_SESSION["number"] - 1);
     }
-
     if (isset($_POST['reset'])) {
         session_destroy();
-        header("Location: index.php");
+        header("Location: " . $_SERVER['PHP_SELF']);
         exit;
     }
 }
 
 // 3. ВЫВОД
 $n = $_SESSION["number"];
+$lang = $_SESSION["lang"];
+$ui = $data[$lang]['ui'];//для кнопок и Вопрос ... из
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +125,28 @@ $n = $_SESSION["number"];
             border-radius: 5px;
             margin-left: 10px;
         }
-
+        .next-prev-button {
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            height: 30px;
+            width: 60px;
+            background-color: #3CB371;
+            color: #F0F8FF;
+        }
+            .next-prev-button:hover {
+                border: none;
+                cursor: pointer;
+                margin: 10px;
+                border-radius: 5px;
+                font-size: 16px;
+                height: 30px;
+                width: 60px;
+                background-color: #2E8B57;
+                color: #F0F8FF;
+            }
 		.theme-toggle-button 
 		{
             padding: 10px 15px;
@@ -141,14 +206,22 @@ $n = $_SESSION["number"];
 	</style> 
 </head>
 <body class="light">
+            <!--<button type="submit" name="lang" value="ru">RU</button>
+            <button type="submit" name="lang" value="en">EN</button>
+            <hr>-->
+    <nav>
+    <a href="?lang=ru">RU</a> | <a href="?lang=en">EN</a>
+</nav>
+<hr>
     <div> 
-    <?php if ($n < count($questions)): ?>
-        <h2>Вопрос <?php echo ($n + 1); ?> из <?php echo count($questions); ?></h2>
-        <p><?php echo $questions[$n]; ?></p>
-        
+    <?php if ($n < count($data[$lang]['questions'])): ?>
+        <h2><?php echo $ui['q'] ?> <?php echo ($n + 1); ?> <?php echo $ui['of'] ?> <?php echo count($data[$lang]['questions']); ?></h2>
+        <p><?php echo $data[$lang]['questions'][$n]; ?></p>
+
         <form method="POST">
+        
             <div class="answers-container">
-            <?php foreach ($answers[$n] as $i => $text): ?>
+            <?php foreach ($data[$lang]['answers'][$n] as $i => $text): ?>
                 <div class="answers-item">
                 <input type="radio" name="answer" id="a<?php echo $i; ?>" value="<?php echo $i; ?>" 
                     <?php echo (isset($_SESSION["user_answers"][$n]) && $_SESSION["user_answers"][$n] == $i) ? 'checked' : ''; ?> required>
@@ -159,9 +232,9 @@ $n = $_SESSION["number"];
             <br>
             <br>
             <?php if ($n > 0): ?>
-                <button type="submit" name="prev">Назад</button>
+                <button type="submit" name="prev" class="next-prev-button"> <?php echo $ui['prev'] ?> </button>
             <?php endif; ?>
-            <button type="submit">Далее</button>
+            <button type="submit" class="next-prev-button"><?php echo $ui['next'] ?></button>
         </form>
 
     <?php else: ?>
@@ -174,9 +247,14 @@ $n = $_SESSION["number"];
             }
         }
         ?>
-        <h2>Тест завершен!</h2>
-        <p>Ваш результат: <?php echo $score; ?> из <?php echo count($questions); ?></p>
-        <form method="POST"><button type="submit" name="reset">Начать заново</button></form>
+        <h2><?php echo $ui['finish'] ?></h2>
+        <p><?php echo $ui['result'] ?>
+        <?php echo $score; ?>
+        <?php echo $ui['of'] ?> 
+        <?php echo count($data); ?></p>
+        <form method="POST">
+        <button type="submit" name="reset" class="next-prev-button"><?php echo $ui['restart'] ?></button>
+        </form>
     <?php endif; ?>
     </div>
     <br>
