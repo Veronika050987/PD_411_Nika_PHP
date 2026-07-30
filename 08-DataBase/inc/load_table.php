@@ -7,30 +7,28 @@ print_r($_GET);
 print_r($_REQUEST);
 echo '</pre>';
 
-$query = file_get_contents(__DIR__ . '/../SQL/' . $_REQUEST['q']);
-echo '<pre>';
-echo $query;
-echo '</pre>';
-//"
-//    SELECT
-//            group_id        AS N'ID',
-//            group_name      AS N'Название группы',
-//            COUNT(stud_id)  AS N'Количество студентов',
-//            direction_name  AS N'Направление обучения'
-//    FROM    Students
-//    JOIN    Groups          ON ([group]=[group_id])
-//    JOIN    Directions      ON (direction=direction_id) 
-//    GROUP BY    group_id, group_name, direction_name;
-//";
+echo '<form method="POST" action="index.php">
+        <input type="hidden" name="q" value="groups.sql">
+        <select name="dir">
+            <option value="">Все направления</option>
+            <option value="Разработка программного обеспечения">Разработка программного обеспечения</option>
+            <option value="Компьютерная графика и дизайн">Компьютерная графика и дизайн</option>
+            <option value="Java development">Java development</option>
+        </select>
+        <button type="submit">Показать</button>
+      </form>';
 
-$results = sqlsrv_query($connection, $query);
-echo assembly_table($results);
-/*echo '<tbody>';
-while($row = sqlsrv_fetch_array($results, SQLSRV_FETCH_ASSOC))
-{
-    echo create_table_row($row);
+//$query = file_get_contents(__DIR__ . '/../SQL/' . $_REQUEST['q']);
+if (isset($_GET['q'])) {
+    $direction = $_GET['dir'] ?? null;
+    $query = file_get_contents(__DIR__ . '/../SQL/' . $_GET['q']);
+    $params = array($direction, $direction);
+    $results = sqlsrv_prepare($connection, $query, $params);
+
+    if (sqlsrv_execute($results)) {
+        echo assembly_table($results);
+    }
 }
-echo '</tbody>';*/
 
 require_once __DIR__ . '/disconnect.php';
 
