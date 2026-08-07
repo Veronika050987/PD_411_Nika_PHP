@@ -38,8 +38,26 @@
                     document.getElementById("table").innerHTML = this.responseText;
                 }
             }
-            request.open("GET", `inc/load_table.php?q=${e.target.id}`, true);
+            request.open("GET", `inc/load_table.php?q=${e.target.id}&html_id=${e.target.id}`, true);
             request.send();
+        }
+        function filterTable(e)
+        {
+            let request = new XMLHttpRequest();
+            request.onreadystatechange = function ()
+            {
+                //alert('onreadystatechange' + e.target.name + '=' + e.target.value);
+                if (this.readyState == 4 && this.status == 200)
+                {
+                    document.getElementById("table").innerHTML = this.responseText;
+                }
+            }
+            request.open("GET", `inc/load_table.php?q=${document.getElementById("table").getElementsByTagName("table")[0].id}&filter=${e.target.name + '=' + e.target.value}&html_id=${document.getElementById("table").getElementsByTagName("table")[0].id}`);
+
+            //request.open("GET", `inc/load_table.php?q=${document.getElementById("table").getElementsByTagName("table")[0].id)}&filter=${direction=e.target.value}`);
+            request.send();
+            //alert(document.getElementById("table").getElementsByTagName("table")[0].id);
+            //alert('FILTER TABLE' + e.target.name + '=' + e.target.value);
         }
     </script>
 </body>

@@ -10,4 +10,3 @@ AND			discipline	=	discipline_id
 GROUP BY	last_name, first_name, middle_name, birth_date, work_since
 --HAVING		COUNT(discipline_id) BETWEEN 3 AND 5	--COUNT(discipline_id) > 5 AND COUNT(discipline_id) < 10 
 ORDER BY	[Количество дисциплин]
-;

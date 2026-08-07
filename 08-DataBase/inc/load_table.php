@@ -8,7 +8,15 @@ print_r($_REQUEST);
 echo '</pre>';
 
 $query = file_get_contents(__DIR__ . '/../SQL/' . $_REQUEST['q']);
+if(isset($_REQUEST['filter']))
+{
+    $filter = $_REQUEST['filter'];
+    $query .= " WHERE {$filter}";
+    echo "<script>alert({$filter})</script>";
+}
+
 echo '<pre>';
+echo '<h2>QUERY TEXT:</h2>';
 echo $query;
 echo '</pre>';
 //"
@@ -24,7 +32,9 @@ echo '</pre>';
 //";
 
 $results = sqlsrv_query($connection, $query);
-echo assembly_table($results);
+$html_id = $_REQUEST['html_id'];
+require_once(__DIR__ . "/combo_box.php");
+echo assembly_table($results, $html_id);
 /*echo '<tbody>';
 while($row = sqlsrv_fetch_array($results, SQLSRV_FETCH_ASSOC))
 {
