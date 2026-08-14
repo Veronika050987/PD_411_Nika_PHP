@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 require_once __DIR__ . '/connect.php';
 require_once __DIR__ . '/assembly_table.php';
 
@@ -7,17 +8,25 @@ print_r($_GET);
 print_r($_REQUEST);
 echo '</pre>';
 
-$query = file_get_contents(__DIR__ . '/../SQL/' . $_REQUEST['q']);
-if(isset($_REQUEST['filter']))
+$base_query = file_get_contents(__DIR__ . '/../SQL/' . $_REQUEST['q']);
+
+if(isset($_REQUEST['filter']) && !empty($_REQUEST['filter']))
 {
     $filter = $_REQUEST['filter'];
-    $query .= " WHERE {$filter}";
-    echo "<script>alert({$filter})</script>";
+
+    if (strpos($filter, "'") !== false && strpos($filter, "N'") === false) {
+        $filter = str_replace("='", "=N'", $filter);
+    }
+
+    $query .= "SELECT * FROM ({$base_query}) AS SubQuery WHERE {$filter}";
+    echo "<script>alert('" . addslashes($filter) . "')</script>";
+} else {
+    $query = $base_query;
 }
 
 echo '<pre>';
 echo '<h2>QUERY TEXT:</h2>';
-echo $query;
+echo htmlspecialchars($query);
 echo '</pre>';
 //"
 //    SELECT
@@ -32,6 +41,18 @@ echo '</pre>';
 //";
 
 $results = sqlsrv_query($connection, $query);
+
+if ($results === false) {
+    echo "<h2 style='color:red;'>❌ Ошибка синтаксиса или выполнения SQL-запроса!</h2>";
+    echo "<pre>";
+    print_r(sqlsrv_errors());
+    echo "</pre>";
+
+    // Закрываем подключение и выходим, чтобы не вызывать assembly_table с ошибкой false
+    require_once __DIR__ . '/disconnect.php';
+    exit;
+}
+
 $html_id = $_REQUEST['html_id'];
 require_once(__DIR__ . "/combo_box.php");
 echo assembly_table($results, $html_id);

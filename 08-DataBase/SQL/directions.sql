@@ -1,4 +1,4 @@
 SELECT
-		direction_id	AS N'ID',
-		direction_name	AS N'Направление обучения'
+		direction_id	AS [ID],
+		direction_name	AS [Направление обучения]
 FROM Directions
